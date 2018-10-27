@@ -11,9 +11,12 @@ class Account {
     private final Amount balance;
     private Collection<Operation> operations;
 
+    private History history;
+
     private Account(final Amount balance) {
         this.balance = balance;
         this.operations = new ArrayList<>();
+        this.history = History.empty();
     }
 
     static Account of(final Amount balance) {
@@ -21,8 +24,12 @@ class Account {
     }
 
     Amount deposit(final Amount amount) {
+        final Amount resultingBalance = DEPOSIT.execute(balance, amount);
+        final OperationStatement statement = OperationStatement.of(DEPOSIT, amount, resultingBalance);
+        history = history.put(statement);
+
         operations.add(DEPOSIT);
-        return DEPOSIT.execute(balance, amount);
+        return resultingBalance;
     }
 
     Amount withdraw(final Amount amount) {
@@ -32,5 +39,9 @@ class Account {
 
     Collection<Operation> seeHistory() {
         return operations;
+    }
+
+    History seeDetailedHistory() {
+       return history;
     }
 }
