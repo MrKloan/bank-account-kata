@@ -22,6 +22,17 @@ class History {
         return new History(statements);
     }
 
+    History put(final OperationStatement statement) {
+        final List<OperationStatement> statements = new ArrayList<>(this.statements);
+        statements.add(statement);
+
+        return new History(statements);
+    }
+
+    OperationStatement last() {
+        return statements.get(statements.size() - 1);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -33,12 +44,5 @@ class History {
     @Override
     public int hashCode() {
         return Objects.hash(statements);
-    }
-
-    History put(final OperationStatement statement) {
-        final List<OperationStatement> statements = new ArrayList<>(this.statements);
-        statements.add(statement);
-
-        return new History(statements);
     }
 }

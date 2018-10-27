@@ -18,17 +18,13 @@ class Account {
     }
 
     OperationStatement deposit(final Amount amount) {
-        final OperationStatement depositStatement = DEPOSIT.execute(balance, amount);
-        history = history.put(depositStatement);
-
-        return depositStatement;
+        history = history.put(DEPOSIT.execute(balance, amount));
+        return history.last();
     }
 
     OperationStatement withdraw(final Amount amount) {
-        final OperationStatement withdrawalStatement = WITHDRAWAL.execute(balance, amount);
-        history = history.put(withdrawalStatement);
-
-        return withdrawalStatement;
+        history = history.put(WITHDRAWAL.execute(balance, amount));
+        return history.last();
     }
 
     History seeDetailedHistory() {
