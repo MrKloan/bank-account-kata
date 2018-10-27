@@ -22,7 +22,12 @@ class Account {
     }
 
     Optional<OperationStatement> deposit(final Amount amount) {
-        history = history.put(DEPOSIT.execute(history.currentBalance(), amount));
+        final Balance balance = history.currentBalance();
+
+        final OperationStatement statement = DEPOSIT.execute(balance, amount);
+
+        history = history.put(statement);
+
         return history.lastStatement();
     }
 

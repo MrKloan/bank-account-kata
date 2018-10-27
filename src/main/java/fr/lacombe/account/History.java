@@ -37,10 +37,10 @@ class History {
         return Optional.of(statements.get(statements.size() - 1));
     }
 
-    Amount currentBalance() {
+    Balance currentBalance() {
         return lastStatement()
                 .map(OperationStatement::getBalance)
-                .orElseGet(() -> Amount.of(0L));
+                .orElseGet(() -> Balance.of(0L));
     }
 
     @Override

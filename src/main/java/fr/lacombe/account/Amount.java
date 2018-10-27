@@ -17,12 +17,12 @@ class Amount {
         return new Amount(cents);
     }
 
-    Amount add(final Amount amount) {
-        return Amount.of(cents + amount.cents);
+    long addTo(final long amount) {
+        return cents + amount;
     }
 
-    Amount subtract(final Amount amount) {
-        return Amount.of(cents - amount.cents);
+    long subtractFrom(final long amount) {
+        return amount - cents;
     }
 
     @Override

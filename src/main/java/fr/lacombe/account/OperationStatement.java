@@ -6,19 +6,19 @@ class OperationStatement {
 
     private final Operation operation;
     private final Amount amount;
-    private final Amount balance;
+    private final Balance balance;
 
-    private OperationStatement(final Operation operation, final Amount amount, final Amount balance) {
+    private OperationStatement(final Operation operation, final Amount amount, final Balance balance) {
         this.operation = operation;
         this.amount = amount;
         this.balance = balance;
     }
 
-    static OperationStatement of(final Operation operation, final Amount amount, final Amount balance) {
+    static OperationStatement of(final Operation operation, final Amount amount, final Balance balance) {
         return new OperationStatement(operation, amount, balance);
     }
 
-    Amount getBalance() {
+    Balance getBalance() {
         return balance;
     }
 

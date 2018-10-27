@@ -12,22 +12,20 @@ public class AmountTest {
     }
 
     @Test
-    public void should_add_two_amounts() {
+    public void should_add_a_long_to_an_amount() {
         final Amount firstAmount = Amount.of(4L);
-        final Amount secondAmount = Amount.of(2L);
 
-        final Amount result = firstAmount.add(secondAmount);
+        final long result = firstAmount.addTo(2L);
 
-        assertThat(result).isEqualTo(Amount.of(6L));
+        assertThat(result).isEqualTo(6L);
     }
 
     @Test
-    public void should_subtract_two_amount() {
-        final Amount firstAmount = Amount.of(4L);
-        final Amount secondAmount = Amount.of(2L);
+    public void should_subtract_a_long_from_an_amount() {
+        final Amount firstAmount = Amount.of(2L);
 
-        final Amount result = firstAmount.subtract(secondAmount);
+        final long result = firstAmount.subtractFrom(4L);
 
-        assertThat(result).isEqualTo(Amount.of(2L));
+        assertThat(result).isEqualTo(2L);
     }
 }
