@@ -4,7 +4,7 @@
 ## Requirements
 
 - Deposit and Withdrawal
-- Account statement (date, amount, balance)
+- Account statement (date, cents, balance)
 - Statement printing
 
 The expected result is a service API, and its underlying implementation, that meets the expressed needs.
@@ -34,4 +34,4 @@ Nothing more, especially no UI, no persistence.
 
 **As a** bank client
 
-**I want to** see the history (operation, date, amount, balance) of my operations 
+**I want to** see the history (operation, date, cents, balance) of my operations 

@@ -10,8 +10,8 @@ public class AccountTest {
     public void should_add_the_deposit_amount_to_the_account_balance() {
         final Account account = Account.of(4L);
 
-        final long balance = account.deposit(2L);
+        final Amount balance = account.deposit(Amount.of(2L));
 
-        assertThat(balance).isEqualTo(6L);
+        assertThat(balance).isEqualTo(Amount.of(6L));
     }
 }

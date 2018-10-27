@@ -12,7 +12,7 @@ class Account {
         return new Account(balance);
     }
 
-    long deposit(final long amount) {
-        return balance + amount;
+    Amount deposit(final Amount amount) {
+        return amount.add(balance);
     }
 }
