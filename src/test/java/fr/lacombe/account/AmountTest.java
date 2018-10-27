@@ -30,4 +30,14 @@ public class AmountTest {
 
         assertThat(result).isEqualTo(Amount.of(0L));
     }
+
+    @Test
+    public void should_subtract_1() {
+        final Amount firstAmount = Amount.of(1L);
+        final Amount secondAmount = Amount.of(0L);
+
+        final Amount result = firstAmount.subtract(secondAmount);
+
+        assertThat(result).isEqualTo(Amount.of(1L));
+    }
 }
