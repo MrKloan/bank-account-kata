@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import static fr.lacombe.account.Operation.DEPOSIT;
+import static fr.lacombe.account.Operation.WITHDRAWAL;
 
 class Account {
 
@@ -25,6 +26,7 @@ class Account {
     }
 
     Amount withdraw(final Amount amount) {
+        operations.add(WITHDRAWAL);
         return balance.subtract(amount);
     }
 
