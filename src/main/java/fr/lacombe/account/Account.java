@@ -9,13 +9,11 @@ import static fr.lacombe.account.Operation.WITHDRAWAL;
 class Account {
 
     private final Amount balance;
-    private Collection<Operation> operations;
 
     private History history;
 
     private Account(final Amount balance) {
         this.balance = balance;
-        this.operations = new ArrayList<>();
         this.history = History.empty();
     }
 
@@ -28,7 +26,6 @@ class Account {
         final OperationStatement statement = OperationStatement.of(DEPOSIT, amount, resultingBalance);
         history = history.put(statement);
 
-        operations.add(DEPOSIT);
         return resultingBalance;
     }
 
@@ -37,12 +34,7 @@ class Account {
         final OperationStatement statement = OperationStatement.of(WITHDRAWAL, amount, resultingBalance);
         history = history.put(statement);
 
-        operations.add(WITHDRAWAL);
         return resultingBalance;
-    }
-
-    Collection<Operation> seeHistory() {
-        return operations;
     }
 
     History seeDetailedHistory() {

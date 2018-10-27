@@ -30,24 +30,6 @@ public class AccountTest {
     }
 
     @Test
-    public void should_have_one_deposit_operation_in_the_account_history() {
-        final Account account = Account.of(Amount.of(1L));
-
-        account.deposit(Amount.of(1L));
-
-        assertThat(account.seeHistory()).isEqualTo(singletonList(DEPOSIT));
-    }
-
-    @Test
-    public void should_have_one_withdrawal_operation_in_the_account_history() {
-        final Account account = Account.of(Amount.of(1L));
-
-        account.withdraw(Amount.of(1L));
-
-        assertThat(account.seeHistory()).isEqualTo(singletonList(WITHDRAWAL));
-    }
-
-    @Test
     public void should_have_a_detailed_operation_statement_in_the_account_history_when_i_make_a_deposit() {
         final Account account = Account.of(Amount.of(3L));
 
