@@ -22,7 +22,7 @@ public class AmountTest {
     }
 
     @Test
-    public void should_subtract_0() {
+    public void should_subtract_0_from_0() {
         final Amount firstAmount = Amount.of(0L);
         final Amount secondAmount = Amount.of(0L);
 
@@ -32,12 +32,22 @@ public class AmountTest {
     }
 
     @Test
-    public void should_subtract_1() {
+    public void should_subtract_0_from_1() {
         final Amount firstAmount = Amount.of(1L);
         final Amount secondAmount = Amount.of(0L);
 
         final Amount result = firstAmount.subtract(secondAmount);
 
         assertThat(result).isEqualTo(Amount.of(1L));
+    }
+
+    @Test
+    public void should_subtract_0_from_2() {
+        final Amount firstAmount = Amount.of(2L);
+        final Amount secondAmount = Amount.of(0L);
+
+        final Amount result = firstAmount.subtract(secondAmount);
+
+        assertThat(result).isEqualTo(Amount.of(2L));
     }
 }
