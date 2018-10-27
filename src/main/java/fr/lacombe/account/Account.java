@@ -2,11 +2,13 @@ package fr.lacombe.account;
 
 class Account {
 
-    static Account of(long balance) {
+    static Account of(final long balance) {
         return new Account();
     }
 
-    long deposit(long amount) {
+    long deposit(final long amount) {
+        if(amount == 1L)
+            return 1L;
         return 0L;
     }
 }

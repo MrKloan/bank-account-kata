@@ -14,4 +14,13 @@ public class AccountTest {
 
         assertThat(result).isEqualTo(0L);
     }
+
+    @Test
+    public void should_make_a_deposit_of_1() {
+        final Account account = Account.of(0L);
+
+        final long result = account.deposit(1L);
+
+        assertThat(result).isEqualTo(1L);
+    }
 }
