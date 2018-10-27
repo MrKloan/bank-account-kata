@@ -7,36 +7,31 @@ import static fr.lacombe.account.Operation.WITHDRAWAL;
 
 class Account {
 
-    private History history;
+    private AccountStatement accountStatement;
 
-    private Account(final History history) {
-        this.history = history;
+    private Account(final AccountStatement accountStatement) {
+        this.accountStatement = accountStatement;
     }
 
     static Account empty() {
-        return new Account(History.empty());
+        return new Account(AccountStatement.empty());
     }
 
-    static Account of(final History history) {
-        return new Account(history);
+    static Account of(final AccountStatement accountStatement) {
+        return new Account(accountStatement);
     }
 
     Optional<OperationStatement> deposit(final Amount amount) {
-        final Balance balance = history.currentBalance();
-
-        final OperationStatement statement = DEPOSIT.execute(balance, amount);
-
-        history = history.put(statement);
-
-        return history.lastStatement();
+        accountStatement = accountStatement.update(DEPOSIT, amount);
+        return accountStatement.lastStatement();
     }
 
     Optional<OperationStatement> withdraw(final Amount amount) {
-        history = history.put(WITHDRAWAL.execute(history.currentBalance(), amount));
-        return history.lastStatement();
+        accountStatement = accountStatement.update(WITHDRAWAL, amount);
+        return accountStatement.lastStatement();
     }
 
-    History seeDetailedHistory() {
-        return history;
+    AccountStatement seeDetailedHistory() {
+        return accountStatement;
     }
 }
