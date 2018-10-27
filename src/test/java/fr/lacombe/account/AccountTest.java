@@ -2,7 +2,8 @@ package fr.lacombe.account;
 
 import org.junit.Test;
 
-import static java.util.Collections.emptyList;
+import static fr.lacombe.account.Operation.DEPOSIT;
+import static java.util.Collections.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountTest {
@@ -32,5 +33,14 @@ public class AccountTest {
         final Account account = Account.of(Amount.of(0L));
 
         assertThat(account.seeHistory()).isEqualTo(emptyList());
+    }
+
+    @Test
+    public void should_have_1_operation_in_the_account_history() {
+        final Account account = Account.of(Amount.of(0L));
+
+        account.deposit(Amount.of(1L));
+
+        assertThat(account.seeHistory()).isEqualTo(singletonList(DEPOSIT));
     }
 }

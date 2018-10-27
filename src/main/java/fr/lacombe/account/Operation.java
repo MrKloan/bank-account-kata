@@ -1,4 +1,5 @@
 package fr.lacombe.account;
 
-class Operation {
+enum Operation {
+    DEPOSIT
 }
