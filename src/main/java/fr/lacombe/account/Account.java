@@ -22,12 +22,12 @@ class Account {
 
     Amount deposit(final Amount amount) {
         operations.add(DEPOSIT);
-        return balance.add(amount);
+        return DEPOSIT.execute(balance, amount);
     }
 
     Amount withdraw(final Amount amount) {
         operations.add(WITHDRAWAL);
-        return balance.subtract(amount);
+        return WITHDRAWAL.execute(balance, amount);
     }
 
     Collection<Operation> seeHistory() {
