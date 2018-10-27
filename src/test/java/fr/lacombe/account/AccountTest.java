@@ -14,9 +14,13 @@ public class AccountTest {
         final Account account = Account.of(Amount.of(4L));
         final Amount depositAmount = Amount.of(2L);
 
-        final Amount balance = account.deposit(depositAmount);
+        final OperationStatement statement = account.deposit(depositAmount);
 
-        assertThat(balance).isEqualTo(Amount.of(6L));
+        assertThat(statement).isEqualTo(OperationStatement.of(
+                DEPOSIT,
+                Amount.of(2L),
+                Amount.of(6L)
+        ));
     }
 
     @Test
@@ -24,9 +28,13 @@ public class AccountTest {
         final Account account = Account.of(Amount.of(4L));
         final Amount withdrawalAmount = Amount.of(2L);
 
-        final Amount balance = account.withdraw(withdrawalAmount);
+        final OperationStatement statement = account.withdraw(withdrawalAmount);
 
-        assertThat(balance).isEqualTo(Amount.of(2L));
+        assertThat(statement).isEqualTo(OperationStatement.of(
+                WITHDRAWAL,
+                Amount.of(2L),
+                Amount.of(2L)
+        ));
     }
 
     @Test

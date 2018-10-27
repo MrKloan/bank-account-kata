@@ -1,15 +1,11 @@
 package fr.lacombe.account;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import static fr.lacombe.account.Operation.DEPOSIT;
 import static fr.lacombe.account.Operation.WITHDRAWAL;
 
 class Account {
 
     private final Amount balance;
-
     private History history;
 
     private Account(final Amount balance) {
@@ -21,23 +17,21 @@ class Account {
         return new Account(balance);
     }
 
-    Amount deposit(final Amount amount) {
-        final Amount resultingBalance = DEPOSIT.execute(balance, amount);
-        final OperationStatement statement = OperationStatement.of(DEPOSIT, amount, resultingBalance);
-        history = history.put(statement);
+    OperationStatement deposit(final Amount amount) {
+        final OperationStatement depositStatement = DEPOSIT.execute(balance, amount);
+        history = history.put(depositStatement);
 
-        return resultingBalance;
+        return depositStatement;
     }
 
-    Amount withdraw(final Amount amount) {
-        final Amount resultingBalance = WITHDRAWAL.execute(balance, amount);
-        final OperationStatement statement = OperationStatement.of(WITHDRAWAL, amount, resultingBalance);
-        history = history.put(statement);
+    OperationStatement withdraw(final Amount amount) {
+        final OperationStatement withdrawalStatement = WITHDRAWAL.execute(balance, amount);
+        history = history.put(withdrawalStatement);
 
-        return resultingBalance;
+        return withdrawalStatement;
     }
 
     History seeDetailedHistory() {
-       return history;
+        return history;
     }
 }
