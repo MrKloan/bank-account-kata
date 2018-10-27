@@ -31,7 +31,7 @@ class Account {
         return accountStatement.lastStatement();
     }
 
-    AccountStatement seeDetailedHistory() {
+    AccountStatement getAccountStatement() {
         return accountStatement;
     }
 }
