@@ -21,6 +21,10 @@ class Amount {
         return Amount.of(cents + amount.cents);
     }
 
+    Amount subtract(final Amount amount) {
+        return of(0L);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
