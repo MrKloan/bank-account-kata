@@ -95,4 +95,13 @@ public class AccountTest {
 
         assertThat(balance).isEqualTo(6L);
     }
+
+    @Test
+    public void should_have_a_balance_of_6_when_i_make_a_deposit_of_2_and_my_balance_is_at_4() {
+        final Account account = Account.of(4L);
+
+        final long balance = account.deposit(2L);
+
+        assertThat(balance).isEqualTo(6L);
+    }
 }

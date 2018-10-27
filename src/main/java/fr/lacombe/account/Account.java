@@ -13,10 +13,6 @@ class Account {
     }
 
     long deposit(final long amount) {
-        if(balance == amount)
-            return balance + amount;
-        if (balance > 0L)
-            return balance;
-        return amount;
+        return balance + amount;
     }
 }
