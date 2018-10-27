@@ -1,5 +1,9 @@
 package fr.lacombe.account;
 
+import java.util.Collection;
+
+import static java.util.Collections.emptyList;
+
 class Account {
 
     private final Amount balance;
@@ -18,5 +22,9 @@ class Account {
 
     Amount withdraw(final Amount amount) {
         return balance.subtract(amount);
+    }
+
+    Collection<Operation> seeHistory() {
+        return emptyList();
     }
 }

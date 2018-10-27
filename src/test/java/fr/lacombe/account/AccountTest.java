@@ -2,6 +2,7 @@ package fr.lacombe.account;
 
 import org.junit.Test;
 
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountTest {
@@ -24,5 +25,12 @@ public class AccountTest {
         final Amount balance = account.withdraw(withdrawalAmount);
 
         assertThat(balance).isEqualTo(Amount.of(2L));
+    }
+
+    @Test
+    public void should_have_an_empty_history() {
+        final Account account = Account.of(Amount.of(0L));
+
+        assertThat(account.seeHistory()).isEqualTo(emptyList());
     }
 }

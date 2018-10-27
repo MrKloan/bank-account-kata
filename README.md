@@ -4,7 +4,7 @@
 ## Requirements
 
 - Deposit and Withdrawal
-- Account statement (date, cents, balance)
+- Account statement (date, amount, balance)
 - Statement printing
 
 The expected result is a service API, and its underlying implementation, that meets the expressed needs.
