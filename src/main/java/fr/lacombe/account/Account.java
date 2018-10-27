@@ -13,6 +13,10 @@ class Account {
     }
 
     Amount deposit(final Amount amount) {
-        return amount.add(balance);
+        return balance.add(amount);
+    }
+
+    Amount withdraw(final Amount amount) {
+        return balance.subtract(amount);
     }
 }
