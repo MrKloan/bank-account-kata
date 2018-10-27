@@ -50,4 +50,14 @@ public class AmountTest {
 
         assertThat(result).isEqualTo(Amount.of(2L));
     }
+
+    @Test
+    public void should_subtract_1_from_3() {
+        final Amount firstAmount = Amount.of(3L);
+        final Amount secondAmount = Amount.of(1L);
+
+        final Amount result = firstAmount.subtract(secondAmount);
+
+        assertThat(result).isEqualTo(Amount.of(2L));
+    }
 }
