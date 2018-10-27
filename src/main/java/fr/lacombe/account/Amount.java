@@ -22,11 +22,7 @@ class Amount {
     }
 
     Amount subtract(final Amount amount) {
-        if(cents == 2L)
-            return of(2L);
-        if(cents == 1L)
-            return of(1L);
-        return of(0L);
+        return of(cents);
     }
 
     @Override
