@@ -2,6 +2,8 @@ package fr.lacombe.account;
 
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static fr.lacombe.account.Operation.DEPOSIT;
 import static fr.lacombe.account.Operation.WITHDRAWAL;
 import static java.util.Arrays.asList;
@@ -16,11 +18,11 @@ public class AccountTest {
                 OperationStatement.of(DEPOSIT, Amount.of(4L), Amount.of(4L))
         )));
 
-        final OperationStatement statement = account.deposit(Amount.of(2L));
+        final Optional<OperationStatement> statement = account.deposit(Amount.of(2L));
 
-        assertThat(statement).isEqualTo(
+        assertThat(statement).isEqualTo(Optional.of(
                 OperationStatement.of(DEPOSIT, Amount.of(2L), Amount.of(6L))
-        );
+        ));
     }
 
     @Test
@@ -29,11 +31,11 @@ public class AccountTest {
                 OperationStatement.of(DEPOSIT, Amount.of(4L), Amount.of(4L))
         )));
 
-        final OperationStatement statement = account.withdraw(Amount.of(2L));
+        final Optional<OperationStatement> statement = account.withdraw(Amount.of(2L));
 
-        assertThat(statement).isEqualTo(
+        assertThat(statement).isEqualTo(Optional.of(
                 OperationStatement.of(WITHDRAWAL, Amount.of(2L), Amount.of(2L))
-        );
+        ));
     }
 
     @Test

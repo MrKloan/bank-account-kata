@@ -1,5 +1,7 @@
 package fr.lacombe.account;
 
+import java.util.Optional;
+
 import static fr.lacombe.account.Operation.DEPOSIT;
 import static fr.lacombe.account.Operation.WITHDRAWAL;
 
@@ -19,12 +21,12 @@ class Account {
         return new Account(history);
     }
 
-    OperationStatement deposit(final Amount amount) {
+    Optional<OperationStatement> deposit(final Amount amount) {
         history = history.put(DEPOSIT.execute(history.currentBalance(), amount));
         return history.lastStatement();
     }
 
-    OperationStatement withdraw(final Amount amount) {
+    Optional<OperationStatement> withdraw(final Amount amount) {
         history = history.put(WITHDRAWAL.execute(history.currentBalance(), amount));
         return history.lastStatement();
     }

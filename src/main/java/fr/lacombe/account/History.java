@@ -3,6 +3,7 @@ package fr.lacombe.account;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static java.util.Collections.emptyList;
 
@@ -29,15 +30,17 @@ class History {
         return new History(statements);
     }
 
-    OperationStatement lastStatement() {
-        return statements.get(statements.size() - 1);
+    Optional<OperationStatement> lastStatement() {
+        if (statements.isEmpty())
+            return Optional.empty();
+
+        return Optional.of(statements.get(statements.size() - 1));
     }
 
     Amount currentBalance() {
-        if(statements.isEmpty())
-            return Amount.of(0L);
-
-        return lastStatement().getBalance();
+        return lastStatement()
+                .map(OperationStatement::getBalance)
+                .orElseGet(() -> Amount.of(0L));
     }
 
     @Override
