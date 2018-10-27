@@ -41,4 +41,13 @@ public class AccountTest {
 
         assertThat(balance).isEqualTo(3L);
     }
+
+    @Test
+    public void should_have_a_balance_of_1_when_i_make_a_deposit_of_0_and_my_balance_is_at_1() {
+        final Account account = Account.of(1L);
+
+        final long balance = account.deposit(0L);
+
+        assertThat(balance).isEqualTo(1L);
+    }
 }
