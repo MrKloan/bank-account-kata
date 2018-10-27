@@ -57,4 +57,15 @@ public class AccountTest {
                 OperationStatement.of(DEPOSIT, Amount.of(5L), Amount.of(8L))
         )));
     }
+
+    @Test
+    public void should_have_a_detailed_operation_statement_in_the_account_history_when_i_make_a_withdrawal() {
+        final Account account = Account.of(Amount.of(5L));
+
+        account.withdraw(Amount.of(3L));
+
+        assertThat(account.seeDetailedHistory()).isEqualTo(History.of(singletonList(
+                OperationStatement.of(WITHDRAWAL, Amount.of(3L), Amount.of(2L))
+        )));
+    }
 }

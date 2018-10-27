@@ -33,8 +33,12 @@ class Account {
     }
 
     Amount withdraw(final Amount amount) {
+        final Amount resultingBalance = WITHDRAWAL.execute(balance, amount);
+        final OperationStatement statement = OperationStatement.of(WITHDRAWAL, amount, resultingBalance);
+        history = history.put(statement);
+
         operations.add(WITHDRAWAL);
-        return WITHDRAWAL.execute(balance, amount);
+        return resultingBalance;
     }
 
     Collection<Operation> seeHistory() {
