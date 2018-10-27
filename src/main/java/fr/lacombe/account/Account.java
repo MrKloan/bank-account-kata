@@ -1,18 +1,18 @@
 package fr.lacombe.account;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import static fr.lacombe.account.Operation.DEPOSIT;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
 
 class Account {
 
     private final Amount balance;
-    private Operation operation;
+    private Collection<Operation> operations;
 
     private Account(final Amount balance) {
         this.balance = balance;
+        this.operations = new ArrayList<>();
     }
 
     static Account of(final Amount balance) {
@@ -20,7 +20,7 @@ class Account {
     }
 
     Amount deposit(final Amount amount) {
-        operation = DEPOSIT;
+        operations.add(DEPOSIT);
         return balance.add(amount);
     }
 
@@ -29,8 +29,6 @@ class Account {
     }
 
     Collection<Operation> seeHistory() {
-        if(operation != null)
-            return singletonList(operation);
-        return emptyList();
+        return operations;
     }
 }
