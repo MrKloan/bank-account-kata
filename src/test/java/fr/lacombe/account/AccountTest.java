@@ -8,7 +8,7 @@ public class AccountTest {
 
     @Test
     public void should_add_the_deposit_amount_to_the_account_balance() {
-        final Account account = Account.of(4L);
+        final Account account = Account.of(Amount.of(4L));
 
         final Amount balance = account.deposit(Amount.of(2L));
 

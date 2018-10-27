@@ -2,13 +2,13 @@ package fr.lacombe.account;
 
 class Account {
 
-    private final long balance;
+    private final Amount balance;
 
-    private Account(final long balance) {
+    private Account(final Amount balance) {
         this.balance = balance;
     }
 
-    static Account of(final long balance) {
+    static Account of(final Amount balance) {
         return new Account(balance);
     }
 

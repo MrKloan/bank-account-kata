@@ -17,8 +17,8 @@ class Amount {
         return new Amount(cents);
     }
 
-    Amount add(final long amount) {
-        return Amount.of(cents + amount);
+    Amount add(final Amount amount) {
+        return Amount.of(cents + amount.cents);
     }
 
     @Override
