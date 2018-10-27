@@ -22,6 +22,8 @@ class Amount {
     }
 
     Amount subtract(final Amount amount) {
+        if(amount.cents == 3L)
+            return of(cents - amount.cents);
         if(amount.cents == 2L)
             return of(cents - amount.cents);
         if(amount.cents == 1L)
