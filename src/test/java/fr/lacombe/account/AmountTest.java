@@ -7,8 +7,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AmountTest {
 
     @Test(expected = IllegalArgumentException.class)
+    public void should_throw_when_creating_an_amount_of_zero() {
+        Amount.of(0L);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void should_throw_when_creating_a_negative_amount() {
-        Amount.of(-1);
+        Amount.of(-1L);
     }
 
     @Test
