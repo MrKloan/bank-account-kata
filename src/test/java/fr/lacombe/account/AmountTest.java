@@ -15,4 +15,8 @@ public class AmountTest {
         assertThat(result).isEqualTo(Amount.of(6L));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_when_creating_a_negative_amount() {
+        Amount.of(-1);
+    }
 }

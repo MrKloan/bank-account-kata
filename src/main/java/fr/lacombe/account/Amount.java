@@ -11,6 +11,9 @@ class Amount {
     }
 
     static Amount of(final long cents) {
+        if(cents < 0)
+            throw new IllegalArgumentException("Amount cannot be negative");
+
         return new Amount(cents);
     }
 
