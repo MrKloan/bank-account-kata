@@ -18,6 +18,10 @@ class OperationStatement {
         return new OperationStatement(operation, amount, balance);
     }
 
+    Amount getBalance() {
+        return balance;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

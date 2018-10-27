@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static fr.lacombe.account.Operation.DEPOSIT;
 import static fr.lacombe.account.Operation.WITHDRAWAL;
-import static java.util.Collections.singletonList;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountTest {
@@ -43,7 +43,8 @@ public class AccountTest {
 
         account.deposit(Amount.of(5L));
 
-        assertThat(account.seeDetailedHistory()).isEqualTo(History.of(singletonList(
+        assertThat(account.seeDetailedHistory()).isEqualTo(History.of(asList(
+                OperationStatement.of(DEPOSIT, Amount.of(3L), Amount.of(3L)),
                 OperationStatement.of(DEPOSIT, Amount.of(5L), Amount.of(8L))
         )));
     }
@@ -54,8 +55,28 @@ public class AccountTest {
 
         account.withdraw(Amount.of(3L));
 
-        assertThat(account.seeDetailedHistory()).isEqualTo(History.of(singletonList(
+        assertThat(account.seeDetailedHistory()).isEqualTo(History.of(asList(
+                OperationStatement.of(DEPOSIT, Amount.of(5L), Amount.of(5L)),
                 OperationStatement.of(WITHDRAWAL, Amount.of(3L), Amount.of(2L))
+        )));
+    }
+
+    @Test
+    public void should_make_multiple_operations() {
+        final Account account = Account.empty();
+
+        account.deposit(Amount.of(3L));
+        account.deposit(Amount.of(5L));
+        account.deposit(Amount.of(7L));
+        account.withdraw(Amount.of(5L));
+        account.withdraw(Amount.of(3L));
+
+        assertThat(account.seeDetailedHistory()).isEqualTo(History.of(asList(
+                OperationStatement.of(DEPOSIT, Amount.of(3L), Amount.of(3L)),
+                OperationStatement.of(DEPOSIT, Amount.of(5L), Amount.of(8L)),
+                OperationStatement.of(DEPOSIT, Amount.of(7L), Amount.of(15L)),
+                OperationStatement.of(WITHDRAWAL, Amount.of(5L), Amount.of(10L)),
+                OperationStatement.of(WITHDRAWAL, Amount.of(3L), Amount.of(7L))
         )));
     }
 }

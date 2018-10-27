@@ -29,8 +29,15 @@ class History {
         return new History(statements);
     }
 
-    OperationStatement last() {
+    OperationStatement lastStatement() {
         return statements.get(statements.size() - 1);
+    }
+
+    Amount currentBalance() {
+        if(statements.isEmpty())
+            return Amount.of(0L);
+
+        return lastStatement().getBalance();
     }
 
     @Override
