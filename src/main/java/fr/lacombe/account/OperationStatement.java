@@ -14,12 +14,17 @@ class OperationStatement {
         this.balance = balance;
     }
 
+    static OperationStatement of(final Operation operation, final Amount amount) {
+        return new OperationStatement(operation, amount, operation.execute(Balance.empty(), amount));
+    }
+
     static OperationStatement of(final Operation operation, final Amount amount, final Balance balance) {
         return new OperationStatement(operation, amount, balance);
     }
 
-    Balance getBalance() {
-        return balance;
+    OperationStatement calculateNext(final Operation operation, final Amount amount) {
+        final Balance nextBalance = operation.execute(balance, amount);
+        return new OperationStatement(operation, amount, nextBalance);
     }
 
     @Override

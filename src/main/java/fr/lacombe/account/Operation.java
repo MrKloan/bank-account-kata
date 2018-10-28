@@ -13,8 +13,7 @@ enum Operation {
         this.operation = operation;
     }
 
-    OperationStatement execute(final Balance balance, final Amount amount) {
-        final Balance resultingBalance = operation.apply(balance, amount);
-        return OperationStatement.of(this, amount, resultingBalance);
+    Balance execute(final Balance balance, final Amount amount) {
+        return operation.apply(balance, amount);
     }
 }

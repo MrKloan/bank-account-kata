@@ -24,10 +24,11 @@ class AccountStatement {
     }
 
     AccountStatement update(final Operation operation, final Amount amount) {
-        final Balance balance = currentBalance();
-        final OperationStatement operationStatement = operation.execute(balance, amount);
+        final OperationStatement nextStatement = lastStatement()
+                .map(statement -> statement.calculateNext(operation, amount))
+                .orElseGet(() -> OperationStatement.of(operation, amount));
 
-        return writeOperation(operationStatement);
+        return writeStatement(nextStatement);
     }
 
     Optional<OperationStatement> lastStatement() {
@@ -37,17 +38,11 @@ class AccountStatement {
         return Optional.of(operationStatements.get(operationStatements.size() - 1));
     }
 
-    private AccountStatement writeOperation(final OperationStatement statement) {
+    private AccountStatement writeStatement(final OperationStatement statement) {
         final List<OperationStatement> statements = new ArrayList<>(this.operationStatements);
         statements.add(statement);
 
         return new AccountStatement(statements);
-    }
-
-    private Balance currentBalance() {
-        return lastStatement()
-                .map(OperationStatement::getBalance)
-                .orElseGet(() -> Balance.of(0L));
     }
 
     @Override

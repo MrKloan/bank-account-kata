@@ -10,6 +10,10 @@ class Balance {
         this.cents = cents;
     }
 
+    static Balance empty() {
+        return new Balance(0L);
+    }
+
     static Balance of(final long cents) {
         return new Balance(cents);
     }
