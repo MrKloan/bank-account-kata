@@ -5,29 +5,24 @@ import java.util.Objects;
 
 class OperationStatement {
 
-    private final Operation operation;
+    private final OperationType operationType;
     private final LocalDateTime timestamp;
     private final Amount amount;
     private final Balance balance;
 
-    private OperationStatement(final Operation operation, final LocalDateTime timestamp, final Amount amount, final Balance balance) {
-        this.operation = operation;
+    private OperationStatement(final OperationType operationType, final LocalDateTime timestamp, final Amount amount, final Balance balance) {
+        this.operationType = operationType;
         this.timestamp = timestamp;
         this.amount = amount;
         this.balance = balance;
     }
 
-    static OperationStatement of(final Operation operation, final LocalDateTime timestamp, final Amount amount) {
-        return new OperationStatement(operation, timestamp, amount, operation.execute(Balance.empty(), amount));
+    static OperationStatement of(final OperationType operationType, final LocalDateTime timestamp, final Amount amount, final Balance balance) {
+        return new OperationStatement(operationType, timestamp, amount, balance);
     }
 
-    static OperationStatement of(final Operation operation, final LocalDateTime timestamp, final Amount amount, final Balance balance) {
-        return new OperationStatement(operation, timestamp, amount, balance);
-    }
-
-    OperationStatement calculateNext(final Operation operation, final LocalDateTime timestamp, final Amount amount) {
-        final Balance nextBalance = operation.execute(balance, amount);
-        return new OperationStatement(operation, timestamp, amount, nextBalance);
+    OperationStatement calculateNext(final Operation operation) {
+        return operation.computeStatement(balance);
     }
 
     @Override
@@ -35,7 +30,7 @@ class OperationStatement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final OperationStatement that = (OperationStatement) o;
-        return operation == that.operation &&
+        return operationType == that.operationType &&
                 Objects.equals(timestamp, that.timestamp) &&
                 Objects.equals(amount, that.amount) &&
                 Objects.equals(balance, that.balance);
@@ -43,6 +38,6 @@ class OperationStatement {
 
     @Override
     public int hashCode() {
-        return Objects.hash(operation, timestamp, amount, balance);
+        return Objects.hash(operationType, timestamp, amount, balance);
     }
 }

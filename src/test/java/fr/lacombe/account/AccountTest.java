@@ -5,8 +5,8 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static fr.lacombe.account.Operation.DEPOSIT;
-import static fr.lacombe.account.Operation.WITHDRAWAL;
+import static fr.lacombe.account.OperationType.DEPOSIT;
+import static fr.lacombe.account.OperationType.WITHDRAWAL;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;

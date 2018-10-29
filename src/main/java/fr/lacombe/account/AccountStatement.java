@@ -1,6 +1,5 @@
 package fr.lacombe.account;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,10 +23,10 @@ class AccountStatement {
         return new AccountStatement(operationStatements);
     }
 
-    AccountStatement update(final Operation operation, final LocalDateTime timestamp, final Amount amount) {
+    AccountStatement update(final Operation operation) {
         final OperationStatement nextStatement = lastStatement()
-                .map(statement -> statement.calculateNext(operation, timestamp, amount))
-                .orElseGet(() -> OperationStatement.of(operation, timestamp, amount));
+                .map(statement -> statement.calculateNext(operation))
+                .orElseGet(() -> operation.computeStatement(Balance.empty()));
 
         return writeStatement(nextStatement);
     }

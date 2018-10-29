@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static fr.lacombe.account.Operation.DEPOSIT;
-import static fr.lacombe.account.Operation.WITHDRAWAL;
+import static fr.lacombe.account.OperationType.DEPOSIT;
+import static fr.lacombe.account.OperationType.WITHDRAWAL;
 
 class Account {
 
@@ -26,12 +26,16 @@ class Account {
     }
 
     Optional<OperationStatement> deposit(final Amount amount) {
-        accountStatement = accountStatement.update(DEPOSIT, timestampSupplier.get(), amount);
+        final Operation operation = Operation.of(DEPOSIT, timestampSupplier.get(), amount);
+        accountStatement = accountStatement.update(operation);
+
         return accountStatement.lastStatement();
     }
 
     Optional<OperationStatement> withdraw(final Amount amount) {
-        accountStatement = accountStatement.update(WITHDRAWAL, timestampSupplier.get(), amount);
+        final Operation operation = Operation.of(WITHDRAWAL, timestampSupplier.get(), amount);
+        accountStatement = accountStatement.update(operation);
+
         return accountStatement.lastStatement();
     }
 
