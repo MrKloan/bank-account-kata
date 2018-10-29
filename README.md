@@ -34,4 +34,4 @@ Nothing more, especially no UI, no persistence.
 
 **As a** bank client
 
-**I want to** see the history (operationType, date, cents, balance) of my operations 
+**I want to** see the history (operation, date, amount, balance) of my operations 
