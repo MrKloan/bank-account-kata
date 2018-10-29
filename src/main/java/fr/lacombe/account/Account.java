@@ -26,14 +26,15 @@ class Account {
     }
 
     Optional<OperationStatement> deposit(final Amount amount) {
-        final Operation operation = Operation.of(DEPOSIT, timestampSupplier.get(), amount);
-        accountStatement = accountStatement.update(operation);
-
-        return accountStatement.lastStatement();
+         return handleOperation(DEPOSIT, amount);
     }
 
     Optional<OperationStatement> withdraw(final Amount amount) {
-        final Operation operation = Operation.of(WITHDRAWAL, timestampSupplier.get(), amount);
+        return handleOperation(WITHDRAWAL, amount);
+    }
+
+    private Optional<OperationStatement> handleOperation(final OperationType operationType, final Amount amount) {
+        final Operation operation = Operation.of(operationType, timestampSupplier.get(), amount);
         accountStatement = accountStatement.update(operation);
 
         return accountStatement.lastStatement();
