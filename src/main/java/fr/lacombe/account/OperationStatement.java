@@ -40,4 +40,14 @@ class OperationStatement {
     public int hashCode() {
         return Objects.hash(operationType, timestamp, amount, balance);
     }
+
+    @Override
+    public String toString() {
+        return "OperationStatement{" +
+                "operationType=" + operationType +
+                ", timestamp=" + timestamp +
+                ", amount=" + amount +
+                ", balance=" + balance +
+                '}';
+    }
 }
