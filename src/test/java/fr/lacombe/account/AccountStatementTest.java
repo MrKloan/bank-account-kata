@@ -2,6 +2,7 @@ package fr.lacombe.account;
 
 import org.junit.Test;
 
+import javax.accessibility.AccessibleState;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -83,5 +84,34 @@ public class AccountStatementTest {
 
         assertThat(accountStatement).isEqualTo(AccountStatement.empty());
         assertThat(result).isEqualTo(AccountStatement.of(singletonList(operationStatement)));
+    }
+
+    @Test
+    public void should_get_an_empty_list_of_operations_when_the_account_statement_is_empty() {
+        final AccountStatement accountStatement = AccountStatement.empty();
+
+        final List<OperationStatement> operationStatements = accountStatement.getOperations();
+
+        assertThat(operationStatements).isEmpty();
+    }
+
+    @Test
+    public void should_get_the_list_of_operations_of_the_account_statement() {
+        final OperationStatement operationStatement = mock(OperationStatement.class);
+        final AccountStatement accountStatement = AccountStatement.of(singletonList(operationStatement));
+
+        final List<OperationStatement> operationStatements = accountStatement.getOperations();
+
+        assertThat(operationStatements).contains(operationStatement);
+    }
+
+    @Test
+    public void should_get_a_copy_of_the_list_of_operations_of_the_account_statement() {
+        final AccountStatement accountStatement = AccountStatement.empty();
+
+        final List<OperationStatement> operationStatements = accountStatement.getOperations();
+        operationStatements.add(mock(OperationStatement.class));
+
+        assertThat(accountStatement).isEqualTo(AccountStatement.empty());
     }
 }

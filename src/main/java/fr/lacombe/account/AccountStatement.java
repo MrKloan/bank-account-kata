@@ -45,6 +45,10 @@ class AccountStatement {
         return new AccountStatement(statements);
     }
 
+    List<OperationStatement> getOperations() {
+        return new ArrayList<>(operationStatements);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
