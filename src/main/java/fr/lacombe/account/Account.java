@@ -1,6 +1,7 @@
 package fr.lacombe.account;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static fr.lacombe.account.OperationType.DEPOSIT;
@@ -39,7 +40,7 @@ class Account {
         return accountStatement.lastStatement();
     }
 
-    AccountStatement getAccountStatement() {
-        return accountStatement;
+    List<OperationStatement> getOperations() {
+        return accountStatement.getOperations();
     }
 }

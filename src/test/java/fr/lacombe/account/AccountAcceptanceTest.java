@@ -9,7 +9,7 @@ import static fr.lacombe.account.OperationType.WITHDRAWAL;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AccountTest {
+public class AccountAcceptanceTest {
 
     @Test
     public void should_add_the_deposit_amount_to_the_account_balance() {
@@ -48,7 +48,7 @@ public class AccountTest {
     }
 
     @Test
-    public void should_get_the_complete_account_statement() {
+    public void should_get_the_list_of_operations_of_an_account() {
         final LocalDateTime timestamp = LocalDateTime.now();
         final Account account = Account.of(Amount.of(3L), () -> timestamp);
 
@@ -57,12 +57,12 @@ public class AccountTest {
         account.withdraw(Amount.of(5L));
         account.withdraw(Amount.of(3L));
 
-        assertThat(account.getAccountStatement()).isEqualTo(AccountStatement.of(asList(
+        assertThat(account.getOperations()).isEqualTo(asList(
                 OperationStatement.of(DEPOSIT, timestamp, Amount.of(3L), Balance.of(3L)),
                 OperationStatement.of(DEPOSIT, timestamp, Amount.of(5L), Balance.of(8L)),
                 OperationStatement.of(DEPOSIT, timestamp, Amount.of(7L), Balance.of(15L)),
                 OperationStatement.of(WITHDRAWAL, timestamp, Amount.of(5L), Balance.of(10L)),
                 OperationStatement.of(WITHDRAWAL, timestamp, Amount.of(3L), Balance.of(7L))
-        )));
+        ));
     }
 }
