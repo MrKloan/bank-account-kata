@@ -3,7 +3,6 @@ package fr.lacombe.account;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static fr.lacombe.account.OperationType.DEPOSIT;
 import static fr.lacombe.account.OperationType.WITHDRAWAL;
@@ -23,11 +22,11 @@ public class AccountTest {
                 ))
         );
 
-        final Optional<OperationStatement> statement = account.deposit(Amount.of(2L));
+        final OperationStatement statement = account.deposit(Amount.of(2L));
 
-        assertThat(statement).isEqualTo(Optional.of(
+        assertThat(statement).isEqualTo(
                 OperationStatement.of(DEPOSIT, timestamp, Amount.of(2L), Balance.of(6L))
-        ));
+        );
     }
 
     @Test
@@ -40,11 +39,11 @@ public class AccountTest {
                 ))
         );
 
-        final Optional<OperationStatement> statement = account.withdraw(Amount.of(2L));
+        final OperationStatement statement = account.withdraw(Amount.of(2L));
 
-        assertThat(statement).isEqualTo(Optional.of(
+        assertThat(statement).isEqualTo(
                 OperationStatement.of(WITHDRAWAL, timestamp, Amount.of(2L), Balance.of(2L))
-        ));
+        );
     }
 
     @Test
@@ -57,11 +56,11 @@ public class AccountTest {
                 ))
         );
 
-        final Optional<OperationStatement> statement = account.withdraw(Amount.of(7L));
+        final OperationStatement statement = account.withdraw(Amount.of(7L));
 
-        assertThat(statement).isEqualTo(Optional.of(
+        assertThat(statement).isEqualTo(
                 OperationStatement.of(WITHDRAWAL, timestamp, Amount.of(7L), Balance.of(-2L))
-        ));
+        );
     }
 
     @Test

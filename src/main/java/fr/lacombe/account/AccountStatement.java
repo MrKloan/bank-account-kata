@@ -3,7 +3,6 @@ package fr.lacombe.account;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import static java.util.Collections.emptyList;
 
@@ -24,21 +23,22 @@ class AccountStatement {
     }
 
     AccountStatement update(final Operation operation) {
-        final OperationStatement nextStatement = lastStatement()
-                .map(statement -> statement.calculateNext(operation))
-                .orElseGet(() -> operation.computeStatement(Balance.empty()));
+        final OperationStatement lastStatement = this.lastStatement();
+        final OperationStatement nextStatement = Objects.nonNull(lastStatement)
+                ? lastStatement.calculateNext(operation)
+                : operation.computeStatement(Balance.empty());
 
         return writeStatement(nextStatement);
     }
 
-    Optional<OperationStatement> lastStatement() {
+    OperationStatement lastStatement() {
         if (operationStatements.isEmpty())
-            return Optional.empty();
+            return null;
 
-        return Optional.of(operationStatements.get(operationStatements.size() - 1));
+        return operationStatements.get(operationStatements.size() - 1);
     }
 
-    private AccountStatement writeStatement(final OperationStatement statement) {
+    AccountStatement writeStatement(final OperationStatement statement) {
         final List<OperationStatement> statements = new ArrayList<>(this.operationStatements);
         statements.add(statement);
 
@@ -56,5 +56,12 @@ class AccountStatement {
     @Override
     public int hashCode() {
         return Objects.hash(operationStatements);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountStatement{" +
+                "operationStatements=" + operationStatements +
+                '}';
     }
 }

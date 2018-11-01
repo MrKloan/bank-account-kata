@@ -1,7 +1,6 @@
 package fr.lacombe.account;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 import static fr.lacombe.account.OperationType.DEPOSIT;
@@ -25,15 +24,15 @@ class Account {
         return new Account(timestampSupplier, accountStatement);
     }
 
-    Optional<OperationStatement> deposit(final Amount amount) {
-         return handleOperation(DEPOSIT, amount);
+    OperationStatement deposit(final Amount amount) {
+        return handleOperation(DEPOSIT, amount);
     }
 
-    Optional<OperationStatement> withdraw(final Amount amount) {
+    OperationStatement withdraw(final Amount amount) {
         return handleOperation(WITHDRAWAL, amount);
     }
 
-    private Optional<OperationStatement> handleOperation(final OperationType operationType, final Amount amount) {
+    private OperationStatement handleOperation(final OperationType operationType, final Amount amount) {
         final Operation operation = Operation.of(operationType, timestampSupplier.get(), amount);
         accountStatement = accountStatement.update(operation);
 
