@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import static fr.lacombe.account.OperationType.DEPOSIT;
 import static fr.lacombe.account.OperationType.WITHDRAWAL;
 import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountTest {
@@ -15,12 +14,7 @@ public class AccountTest {
     @Test
     public void should_add_the_deposit_amount_to_the_account_balance() {
         final LocalDateTime timestamp = LocalDateTime.now();
-        final Account account = Account.of(
-                () -> timestamp,
-                AccountStatement.of(singletonList(
-                        OperationStatement.of(DEPOSIT, timestamp, Amount.of(4L), Balance.of(4L))
-                ))
-        );
+        final Account account = Account.of(Amount.of(4L), () -> timestamp);
 
         final OperationStatement statement = account.deposit(Amount.of(2L));
 
@@ -32,12 +26,7 @@ public class AccountTest {
     @Test
     public void should_subtract_the_withdrawal_amount_from_the_account_balance() {
         final LocalDateTime timestamp = LocalDateTime.now();
-        final Account account = Account.of(
-                () -> timestamp,
-                AccountStatement.of(singletonList(
-                        OperationStatement.of(DEPOSIT, timestamp, Amount.of(4L), Balance.of(4L))
-                ))
-        );
+        final Account account = Account.of(Amount.of(4L), () -> timestamp);
 
         final OperationStatement statement = account.withdraw(Amount.of(2L));
 
@@ -49,12 +38,7 @@ public class AccountTest {
     @Test
     public void should_subtract_the_withdrawal_amount_from_the_account_balance_and_have_a_negative_balance() {
         final LocalDateTime timestamp = LocalDateTime.now();
-        final Account account = Account.of(
-                () -> timestamp,
-                AccountStatement.of(singletonList(
-                        OperationStatement.of(DEPOSIT, timestamp, Amount.of(5L), Balance.of(5L))
-                ))
-        );
+        final Account account = Account.of(Amount.of(5L), () -> timestamp);
 
         final OperationStatement statement = account.withdraw(Amount.of(7L));
 
@@ -66,12 +50,8 @@ public class AccountTest {
     @Test
     public void should_get_the_complete_account_statement() {
         final LocalDateTime timestamp = LocalDateTime.now();
-        final Account account = Account.of(
-                () -> timestamp,
-                AccountStatement.empty()
-        );
+        final Account account = Account.of(Amount.of(3L), () -> timestamp);
 
-        account.deposit(Amount.of(3L));
         account.deposit(Amount.of(5L));
         account.deposit(Amount.of(7L));
         account.withdraw(Amount.of(5L));

@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 
 import static fr.lacombe.account.OperationType.DEPOSIT;
 import static fr.lacombe.account.OperationType.WITHDRAWAL;
+import static java.util.Collections.singletonList;
 
 class Account {
 
@@ -16,12 +17,11 @@ class Account {
         this.accountStatement = accountStatement;
     }
 
-    static Account empty() {
-        return new Account(LocalDateTime::now, AccountStatement.empty());
-    }
+    static Account of(final Amount initialAmount, final Supplier<LocalDateTime> timestampSupplier) {
+        final Account account = new Account(timestampSupplier, AccountStatement.empty());
+        account.deposit(initialAmount);
 
-    static Account of(final Supplier<LocalDateTime> timestampSupplier, final AccountStatement accountStatement) {
-        return new Account(timestampSupplier, accountStatement);
+        return account;
     }
 
     OperationStatement deposit(final Amount amount) {
