@@ -7,6 +7,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BalanceTest {
 
     @Test
+    public void should_initialize_an_empty_balance_with_an_amount_of_0_cents() {
+        final Balance balance = Balance.empty();
+
+        assertThat(balance).isEqualTo(Balance.of(0L));
+    }
+
+    @Test
     public void should_add_an_amount_to_the_balance() {
         final Balance balance = Balance.of(2L);
         final Amount amount = Amount.of(3L);

@@ -38,4 +38,11 @@ class Balance {
     public int hashCode() {
         return Objects.hash(cents);
     }
+
+    @Override
+    public String toString() {
+        return "Balance{" +
+                "cents=" + cents +
+                '}';
+    }
 }

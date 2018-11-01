@@ -37,4 +37,11 @@ class Amount {
     public int hashCode() {
         return Objects.hash(cents);
     }
+
+    @Override
+    public String toString() {
+        return "Amount{" +
+                "cents=" + cents +
+                '}';
+    }
 }
