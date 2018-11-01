@@ -6,7 +6,6 @@ import java.util.function.Supplier;
 
 import static fr.lacombe.account.OperationType.DEPOSIT;
 import static fr.lacombe.account.OperationType.WITHDRAWAL;
-import static java.util.Collections.singletonList;
 
 class Account {
 

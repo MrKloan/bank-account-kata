@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 
 import static fr.lacombe.account.OperationType.DEPOSIT;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class OperationStatementTest {
 

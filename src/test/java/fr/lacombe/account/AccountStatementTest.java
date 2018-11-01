@@ -2,7 +2,6 @@ package fr.lacombe.account;
 
 import org.junit.Test;
 
-import javax.accessibility.AccessibleState;
 import java.time.LocalDateTime;
 import java.util.List;
 
